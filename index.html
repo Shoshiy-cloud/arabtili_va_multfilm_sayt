@@ -6,6 +6,8 @@
 <title>Arabtili va Multfilm | عربية وكرتون</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<!-- Font Awesome 6 (free) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -60,8 +62,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   text-decoration: none;
 }
 .sidebar-logo img {
-  width: 44px; height: 44px; border-radius: 0;
-  object-fit: contain; background: transparent;
+  width: 44px; height: 44px; border-radius: 12px; object-fit: cover;
+  box-shadow: 0 4px 14px rgba(249,115,22,.4);
 }
 .sidebar-logo-fallback {
   width: 44px; height: 44px; border-radius: 12px;
@@ -97,7 +99,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .social-btn {
   width: 34px; height: 34px; border-radius: 9px;
   border: 1px solid var(--border); background: var(--card);
-  color: var(--text2); font-size: 15px;
+  color: var(--text2); font-size: 16px;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; text-decoration: none; transition: all .2s;
 }
@@ -133,7 +135,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .top-btn {
   height: 36px; padding: 0 14px; border-radius: 9px;
   border: 1px solid var(--border); background: var(--card);
-  color: var(--text2); font-family: var(--font); font-size: 12px;
+  color: var(--text2); font-family: var(--font); font-size: 13px;
   font-weight: 800; cursor: pointer; display: flex; align-items: center;
   gap: 6px; transition: all .2s; white-space: nowrap;
 }
@@ -147,9 +149,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .avatar-btn {
   width: 36px; height: 36px; border-radius: 50%;
   background: linear-gradient(135deg,#f97316,#ea580c);
-  border: none; cursor: pointer; font-size: 17px;
+  border: none; cursor: pointer; font-size: 16px;
   display: flex; align-items: center; justify-content: center;
-  transition: transform .2s;
+  transition: transform .2s; color: white;
 }
 .avatar-btn:hover { transform: scale(1.08); }
 
@@ -389,7 +391,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   <a href="#" class="sidebar-logo">
     <img src="logo.png" alt="Logo"
       onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-    <div class="sidebar-logo-fallback">🎬</div>
+    <div class="sidebar-logo-fallback"><i class="fas fa-film"></i></div>
     <div class="sidebar-logo-text">
       <span>Arabtili va Multfilm</span>
       <span>عربية وكرتون</span>
@@ -399,48 +401,48 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   <nav class="sidebar-nav">
     <div class="nav-label" data-uz="Menyu" data-ar="القائمة" data-en="Menu">Menyu</div>
     <button class="nav-item active" onclick="setPage('home')">
-      <span class="nav-icon">🏠</span>
+      <span class="nav-icon"><i class="fas fa-home"></i></span>
       <span data-uz="Bosh sahifa" data-ar="الرئيسية" data-en="Home">Bosh sahifa</span>
     </button>
     <button class="nav-item" onclick="setPage('multfilm')">
-      <span class="nav-icon">🎬</span>
+      <span class="nav-icon"><i class="fas fa-film"></i></span>
       <span data-uz="Multfilmlar" data-ar="كرتون" data-en="Cartoons">Multfilmlar</span>
     </button>
     <button class="nav-item" onclick="setPage('serial')">
-      <span class="nav-icon">📺</span>
+      <span class="nav-icon"><i class="fas fa-tv"></i></span>
       <span data-uz="Multseriallar" data-ar="مسلسلات" data-en="Series">Multseriallar</span>
     </button>
     <button class="nav-item" onclick="setPage('subtitr')">
-      <span class="nav-icon">🔤</span>
+      <span class="nav-icon"><i class="fas fa-language"></i></span>
       <span data-uz="Subtitrli" data-ar="مترجم" data-en="Subtitled">Subtitrli</span>
     </button>
     <div class="nav-label" style="margin-top:8px" data-uz="Hisob" data-ar="الحساب" data-en="Account">Hisob</div>
     <button class="nav-item" onclick="openAuth()">
-      <span class="nav-icon">👤</span>
+      <span class="nav-icon"><i class="fas fa-list"></i></span>
       <span data-uz="Mening ro'yxatim" data-ar="ملفي الشخصي" data-en="My Profile">Mening ro'yxatim</span>
     </button>
     <button class="nav-item" onclick="openSettings()">
-      <span class="nav-icon">⚙️</span>
+      <span class="nav-icon"><i class="fas fa-sliders-h"></i></span>
       <span data-uz="Sozlamalar" data-ar="الإعدادات" data-en="Settings">Sozlamalar</span>
     </button>
   </nav>
 
   <div class="sidebar-bottom">
     <div class="social-row">
-      <a href="https://t.me/arabtili_va_multfilm" target="_blank" class="social-btn" title="Telegram">✈️</a>
-      <a href="#" class="social-btn" title="Instagram">📸</a>
-      <a href="#" class="social-btn" title="TikTok">🎵</a>
-      <a href="#" class="social-btn" title="YouTube">▶️</a>
+      <a href="https://t.me/arabtili_va_multfilm" target="_blank" class="social-btn" title="Telegram"><i class="fab fa-telegram"></i></a>
+      <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-btn" title="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="#" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
     </div>
   </div>
 </aside>
 
 <!-- ===== TOPBAR ===== -->
 <header class="topbar">
-  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+  <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
 
   <div class="search-wrap">
-    <span>🔍</span>
+    <span><i class="fas fa-search"></i></span>
     <input type="text" id="searchInput"
       placeholder="Izlash..."
       data-uz-ph="Izlash..."
@@ -450,13 +452,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 
   <div class="topbar-right">
-    <button class="top-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+    <button class="top-btn" onclick="toggleTheme()" id="themeBtn"><i class="fas fa-moon"></i> <span class="theme-text"></span></button>
     <select class="lang-select" onchange="setLang(this.value)">
-      <option value="uz">🇺🇿 UZ</option>
-      <option value="ar">🇸🇦 AR</option>
-      <option value="en">🇬🇧 EN</option>
+      <option value="uz"><i class="fas fa-globe"></i> 🇺🇿 UZ</option>
+      <option value="ar"><i class="fas fa-globe"></i> 🇸🇦 AR</option>
+      <option value="en"><i class="fas fa-globe"></i> 🇬🇧 EN</option>
     </select>
-    <button class="avatar-btn" onclick="openAuth()">👤</button>
+    <button class="avatar-btn" onclick="openAuth()"><i class="fas fa-user"></i></button>
   </div>
 </header>
 
@@ -469,7 +471,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <!-- Slide 1 -->
       <div class="hero-slide active">
         <div class="hero-text">
-          <div class="hero-badge">🌟 <span data-uz="Yangi" data-ar="جديد" data-en="New">Yangi</span></div>
+          <div class="hero-badge"><i class="fas fa-star"></i> <span data-uz="Yangi" data-ar="جديد" data-en="New">Yangi</span></div>
           <h1 class="hero-title">
             <span class="hi" data-uz="Arab Tili " data-ar="اللغة " data-en="Arabic ">Arab Tili </span>
             <span class="ha" data-uz="va Multfilm" data-ar="العربية" data-en="Cartoons">va Multfilm</span>
@@ -480,17 +482,16 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
             Arab tilida multfilmlar, multseriallar va subtitrli multfilmlarni eng yaxshi sifatda tomosha qiling!
           </p>
           <div class="hero-btns">
-            <button class="btn-primary">▶ <span data-uz="Tomosha qilish" data-ar="مشاهدة" data-en="Watch Now">Tomosha qilish</span></button>
-            <button class="btn-secondary" data-uz="Ko'proq ma'lumot" data-ar="مزيد من المعلومات" data-en="Learn More">Ko'proq ma'lumot</button>
+            <button class="btn-primary"><i class="fas fa-play"></i> <span data-uz="Tomosha qilish" data-ar="مشاهدة" data-en="Watch Now">Tomosha qilish</span></button>
+            <button class="btn-secondary"><i class="fas fa-info-circle"></i> <span data-uz="Ko'proq ma'lumot" data-ar="مزيد من المعلومات" data-en="Learn More">Ko'proq ma'lumot</span></button>
           </div>
         </div>
-        <img class="hero-img" src="hero1.png" alt=""
-          onerror="this.style.cssText='font-size:90px;width:160px;height:160px;display:flex;align-items:center;justify-content:center;animation:float 4s ease-in-out infinite'">
+        <div style="font-size:100px;animation:float 4s ease-in-out infinite;flex-shrink:0"><i class="fas fa-language" style="color:var(--accent)"></i></div>
       </div>
       <!-- Slide 2 -->
       <div class="hero-slide">
         <div class="hero-text">
-          <div class="hero-badge">🎬 <span data-uz="130+ Multfilm" data-ar="130+ فيلم" data-en="130+ Films">130+ Multfilm</span></div>
+          <div class="hero-badge"><i class="fas fa-film"></i> <span data-uz="130+ Multfilm" data-ar="130+ فيلم" data-en="130+ Films">130+ Multfilm</span></div>
           <h1 class="hero-title">
             <span class="hi" data-uz="Mashhur " data-ar="أشهر " data-en="Popular ">Mashhur </span>
             <span class="ha" data-uz="Multfilmlar" data-ar="الأفلام" data-en="Cartoons">Multfilmlar</span>
@@ -501,15 +502,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
             Sher Qirol, Kung Fu Panda, Muzyurak va boshqa 130+ multfilmni arab tilida tomosha qiling!
           </p>
           <div class="hero-btns">
-            <button class="btn-primary" onclick="setPage('multfilm')">🎬 <span data-uz="Multfilmlarga o'tish" data-ar="الأفلام" data-en="View Films">Multfilmlarga o'tish</span></button>
+            <button class="btn-primary" onclick="setPage('multfilm')"><i class="fas fa-film"></i> <span data-uz="Multfilmlarga o'tish" data-ar="الأفلام" data-en="View Films">Multfilmlarga o'tish</span></button>
           </div>
         </div>
-        <div style="font-size:100px;animation:float 4s ease-in-out infinite;flex-shrink:0">🎬</div>
+        <div style="font-size:100px;animation:float 4s ease-in-out infinite;flex-shrink:0"><i class="fas fa-film" style="color:var(--accent)"></i></div>
       </div>
       <!-- Slide 3 -->
       <div class="hero-slide">
         <div class="hero-text">
-          <div class="hero-badge">📺 <span data-uz="9 ta Serial" data-ar="9 مسلسلات" data-en="9 Series">9 ta Serial</span></div>
+          <div class="hero-badge"><i class="fas fa-tv"></i> <span data-uz="9 ta Serial" data-ar="9 مسلسلات" data-en="9 Series">9 ta Serial</span></div>
           <h1 class="hero-title">
             <span class="hi" data-uz="Sevimli " data-ar="المسلسلات " data-en="Favorite ">Sevimli </span>
             <span class="ha" data-uz="Multseriallar" data-ar="المفضلة" data-en="Series">Multseriallar</span>
@@ -520,10 +521,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
             Smurflar, Kichkina Nikola, Sponjbob va boshqa seriallarni arab tilida tomosha qiling!
           </p>
           <div class="hero-btns">
-            <button class="btn-primary" onclick="setPage('serial')">📺 <span data-uz="Seriallarga o'tish" data-ar="المسلسلات" data-en="View Series">Seriallarga o'tish</span></button>
+            <button class="btn-primary" onclick="setPage('serial')"><i class="fas fa-tv"></i> <span data-uz="Seriallarga o'tish" data-ar="المسلسلات" data-en="View Series">Seriallarga o'tish</span></button>
           </div>
         </div>
-        <div style="font-size:100px;animation:float 4s ease-in-out infinite;flex-shrink:0">📺</div>
+        <div style="font-size:100px;animation:float 4s ease-in-out infinite;flex-shrink:0"><i class="fas fa-tv" style="color:var(--accent2)"></i></div>
       </div>
 
       <div class="hero-dots">
@@ -571,14 +572,14 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <script>
 // ===== DATA =====
 const POPULAR = [
-  { title: "Minionlar Gru davri 4", year: "2024", dur: "1soat 34min", emoji: "" },
-  { title: "Qirol Sher (Mufasa)", year: "2024", dur: "1soat 58min", emoji: "" },
-  { title: "Ichki dunyo 2", year: "2024", dur: "1soat 36min", emoji: "" },
-  { title: "Kung Fu Panda 4", year: "2024", dur: "1soat 34min", emoji: "" },
-  { title: "Super Mario Bros.", year: "2023", dur: "1soat 32min", emoji: "" },
-  { title: "Zootopia", year: "2016", dur: "1soat 41min", emoji: "" },
-  { title: "Muzyurak", year: "2013", dur: "1soat 42min", emoji: "" },
-  { title: "Moana 2", year: "2024", dur: "1soat 40min", emoji: "" },
+  { title: "Minionlar Gru davri 4", year: "2024", dur: "1soat 34min", emoji: "🟡" },
+  { title: "Qirol Sher (Mufasa)", year: "2024", dur: "1soat 58min", emoji: "🦁" },
+  { title: "Ichki dunyo 2", year: "2024", dur: "1soat 36min", emoji: "😊" },
+  { title: "Kung Fu Panda 4", year: "2024", dur: "1soat 34min", emoji: "🐼" },
+  { title: "Super Mario Bros.", year: "2023", dur: "1soat 32min", emoji: "🎮" },
+  { title: "Zootopia", year: "2016", dur: "1soat 41min", emoji: "🦊" },
+  { title: "Muzyurak", year: "2013", dur: "1soat 42min", emoji: "❄️" },
+  { title: "Moana 2", year: "2024", dur: "1soat 40min", emoji: "🌊" },
 ];
 
 const CATALOGS = [
@@ -677,7 +678,12 @@ let isDark = true;
 function toggleTheme() {
   isDark = !isDark;
   document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
-  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+  const btn = document.getElementById('themeBtn');
+  if (isDark) {
+    btn.innerHTML = '<i class="fas fa-moon"></i> <span class="theme-text"></span>';
+  } else {
+    btn.innerHTML = '<i class="fas fa-sun"></i> <span class="theme-text"></span>';
+  }
 }
 
 // ===== SIDEBAR =====
