@@ -334,6 +334,105 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   font-size: 10px; font-weight: 700; color: var(--text2);
 }
 
+/* ===== SETTINGS & SUBTITLED SECTION ===== */
+.settings-subtitles-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 40px 0 30px;
+}
+.settings-panel, .subtitled-panel {
+  flex: 1;
+  min-width: 240px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  transition: all .2s;
+}
+.settings-panel h3, .subtitled-panel h3 {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+}
+.settings-list {
+  list-style: none;
+}
+.settings-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.settings-list li span:first-child {
+  color: var(--text2);
+}
+.settings-list li span:last-child {
+  font-weight: 700;
+  color: var(--accent);
+  cursor: pointer;
+}
+.subtitle-langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.lang-chip {
+  padding: 5px 12px;
+  border-radius: 30px;
+  background: var(--bg3);
+  font-size: 12px;
+  cursor: pointer;
+  transition: .2s;
+}
+.lang-chip.active {
+  background: var(--accent);
+  color: #fff;
+}
+.subtitle-movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.subtitle-movie {
+  background: var(--card);
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  transition: .2s;
+  cursor: pointer;
+}
+.subtitle-movie:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.subtitle-movie strong {
+  display: block;
+  font-size: 13px;
+}
+.subtitle-movie span {
+  font-size: 10px;
+  color: var(--text3);
+}
+.favorite-text {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+}
+
 /* ===== OVERLAY (sidebar mobile) ===== */
 .sidebar-overlay {
   display: none; position: fixed; inset: 0;
@@ -561,6 +660,41 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       </div>
     </div>
 
+    <!-- ===== SOZLAMALAR VA SUBTITRLI MULTFILMLAR ===== -->
+    <div class="settings-subtitles-section reveal">
+      <!-- SOZLAMALAR PANELI -->
+      <div class="settings-panel">
+        <h3><i class="fas fa-sliders-h"></i> Sozlamalar</h3>
+        <ul class="settings-list">
+          <li><span>Til / Language</span> <span id="langSetting" data-value="uz">O'zbekcha</span></li>
+          <li><span>Ko'rinish</span> <span id="themeSetting" data-value="dark">Qorong'u</span></li>
+          <li><span>Bildirishnomalar</span> <span id="notifSetting" data-value="on">Yoniq</span></li>
+          <li><span>Iqro sifat</span> <span id="qualitySetting" data-value="high">Yuqori</span></li>
+          <li><span>Subtitrlar</span> <span id="subSetting" data-value="uz">O'zbekcha</span></li>
+          <li><span>Keshi tozalash</span> <span id="cacheSetting">Tozalash</span></li>
+          <li><span>Hisobni boshqarish</span> <span id="accountSetting">Profil</span></li>
+        </ul>
+      </div>
+
+      <!-- SUBTITRLI MULTFILMLAR -->
+      <div class="subtitled-panel">
+        <h3><i class="fas fa-language"></i> Subtitrli multfilmlar</h3>
+        <div class="subtitle-langs" id="subtitleLangs">
+          <div class="lang-chip active" data-lang="all">Barchasi</div>
+          <div class="lang-chip" data-lang="uz">O'zbekcha</div>
+          <div class="lang-chip" data-lang="en">Inglizcha</div>
+          <div class="lang-chip" data-lang="ar">Arabcha</div>
+          <div class="lang-chip" data-lang="tr">Turkcha</div>
+        </div>
+        <div class="subtitle-movies" id="subtitleMovies">
+          <!-- kinolar ro'yxati JS orqali to'ldiriladi -->
+        </div>
+        <div class="favorite-text">
+          🌟 Sevimli multfilmlarni biz bilan tomosha qiling!
+        </div>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -707,15 +841,13 @@ function setPage(page) {
 function openAuth() { alert("Tez orada — hisob tizimi qo'shiladi! 🔐"); }
 function openSettings() { alert("Sozlamalar — tez orada! ⚙️"); }
 
-  // ===== SOCIAL MEDIA FUNCTIONS =====
+// ===== SOCIAL MEDIA FUNCTIONS =====
 function openInstagram() {
   window.open('https://www.instagram.com/arabtili_va_multfilm', '_blank');
 }
-
 function openTikTok() {
   window.open('https://www.tiktok.com/@arabtili_va_multfilm', '_blank');
 }
-
 function openYouTube() {
   window.open('https://www.youtube.com/@arabtili_va_multfilm', '_blank');
 }
@@ -737,6 +869,92 @@ function handleSearch(val) {
   `).join('');
 }
 
+// ===== SUBTITLED MOVIES DATA =====
+const subtitledMoviesList = [
+  { title: "How to Train Your Dragon", year: "2024", lang: "en" },
+  { title: "The Lion King", year: "2024", lang: "en" },
+  { title: "Big Hero 6", year: "2024", lang: "en" },
+  { title: "Zootopia", year: "2024", lang: "en" },
+  { title: "The Croods", year: "2024", lang: "en" },
+  { title: "Moana 2", year: "2024", lang: "en" },
+  { title: "Kung Fu Panda 4", year: "2024", lang: "en" },
+  { title: "Inside Out 2", year: "2024", lang: "en" },
+  { title: "Minions", year: "2024", lang: "en" },
+  { title: "Mufasa", year: "2024", lang: "en" }
+];
+
+function renderSubtitleMovies(filterLang = "all") {
+  const container = document.getElementById("subtitleMovies");
+  let filtered = subtitledMoviesList;
+  if (filterLang !== "all") {
+    filtered = subtitledMoviesList.filter(m => m.lang === filterLang);
+  }
+  if (filtered.length === 0) {
+    container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:20px;">Bu tilda multfilmlar hali yo\'q</div>';
+    return;
+  }
+  container.innerHTML = filtered.map(m => `
+    <div class="subtitle-movie" onclick="alert('${m.title} - subtitrli tomosha qilish tez orada')">
+      <strong>${m.title}</strong>
+      <span>${m.year}</span>
+    </div>
+  `).join("");
+}
+
+// Til chiplari bosilganda
+document.querySelectorAll(".lang-chip").forEach(chip => {
+  chip.addEventListener("click", function() {
+    document.querySelectorAll(".lang-chip").forEach(c => c.classList.remove("active"));
+    this.classList.add("active");
+    let lang = this.getAttribute("data-lang");
+    renderSubtitleMovies(lang);
+  });
+});
+
+// Sozlamalar panelidagi har bir satrga bosish uchun
+document.querySelectorAll(".settings-list li span:last-child").forEach(settingSpan => {
+  settingSpan.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const settingName = settingSpan.parentElement.querySelector("span:first-child").innerText;
+    alert("⚙️ " + settingName + " sozlamasi tez orada qo'shiladi!");
+  });
+});
+
+// Keshi tozalash
+document.getElementById("cacheSetting")?.addEventListener("click", () => alert("🗑 Kesh tozalandi!"));
+document.getElementById("accountSetting")?.addEventListener("click", () => alert("👤 Hisob sozlamalari tez orada"));
+
+// Qorong'u/yorug' sozlamasiga bog'lash
+const themeSettingSpan = document.getElementById("themeSetting");
+if(themeSettingSpan) {
+  themeSettingSpan.addEventListener("click", () => {
+    toggleTheme();
+    themeSettingSpan.innerText = isDark ? "Qorong'u" : "Yorug'";
+  });
+}
+
+// Til sozlamasi
+const langSettingSpan = document.getElementById("langSetting");
+if(langSettingSpan) {
+  langSettingSpan.addEventListener("click", () => {
+    let newLang = langSettingSpan.innerText === "O'zbekcha" ? "English" : "O'zbekcha";
+    langSettingSpan.innerText = newLang;
+    alert("🌐 Til o'zgartirildi: " + newLang);
+  });
+}
+
+// Subtitr sozlamasi
+const subSettingSpan = document.getElementById("subSetting");
+if(subSettingSpan) {
+  subSettingSpan.addEventListener("click", () => {
+    const options = ["O'zbekcha", "Inglizcha", "Arabcha", "Turkcha"];
+    let current = subSettingSpan.innerText;
+    let nextIndex = (options.indexOf(current) + 1) % options.length;
+    subSettingSpan.innerText = options[nextIndex];
+    alert("🎙 Subtitr tili: " + options[nextIndex]);
+  });
+}
+
 // ===== SCROLL REVEAL =====
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -747,6 +965,7 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 renderPopular();
 renderCatalogs('all');
 autoSlide();
+renderSubtitleMovies("all");
 </script>
 </body>
 </html>
