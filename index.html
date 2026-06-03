@@ -1,843 +1,733 @@
 <!DOCTYPE html>
 <html lang="uz" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <title>Arabtili va Multfilm | عربية وكرتون</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0a0f0d;
-      --bg2: #0f1a14;
-      --bg3: #162010;
-      --card: #111f15;
-      --card-hover: #1a2e1e;
-      --accent: #e8681a;
-      --accent2: #38bdf8;
-      --accent3: #4ade80;
-      --text: #f0faf2;
-      --text2: #9dbfa5;
-      --text3: #5a8062;
-      --border: rgba(255,255,255,0.07);
-      --shadow: 0 8px 32px rgba(0,0,0,0.5);
-      --radius: 16px;
-      --font-main: 'Nunito', sans-serif;
-      --font-ar: 'Tajawal', sans-serif;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>Arabtili va Multfilm | عربية وكرتون</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #0d1117;
+  --bg2: #161b22;
+  --bg3: #1c2330;
+  --card: #1c2330;
+  --card-hover: #232d3f;
+  --accent: #f97316;
+  --accent2: #38bdf8;
+  --text: #e6edf3;
+  --text2: #8b949e;
+  --text3: #484f58;
+  --border: rgba(255,255,255,0.08);
+  --sidebar-w: 220px;
+  --topbar-h: 64px;
+  --radius: 14px;
+  --font: 'Nunito', sans-serif;
+  --font-ar: 'Tajawal', sans-serif;
+}
+[data-theme="light"] {
+  --bg: #f6f8fa;
+  --bg2: #ffffff;
+  --bg3: #eef2f7;
+  --card: #ffffff;
+  --card-hover: #f0f4f8;
+  --accent: #ea6c0a;
+  --accent2: #0284c7;
+  --text: #1c2330;
+  --text2: #57606a;
+  --text3: #8c959f;
+  --border: rgba(0,0,0,0.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
 
-    [data-theme="light"] {
-      --bg: #f0faf4;
-      --bg2: #ffffff;
-      --bg3: #e0f5e8;
-      --card: #ffffff;
-      --card-hover: #f0faf4;
-      --accent: #d45f10;
-      --accent2: #0284c7;
-      --accent3: #16a34a;
-      --text: #0d2914;
-      --text2: #2d6040;
-      --text3: #5a8062;
-      --border: rgba(0,0,0,0.08);
-      --shadow: 0 8px 32px rgba(0,0,0,0.1);
-    }
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  z-index: 200;
+  transition: transform .3s ease;
+}
+.sidebar-logo {
+  display: flex; align-items: center; gap: 10px;
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+}
+.sidebar-logo img {
+  width: 44px; height: 44px; border-radius: 12px; object-fit: cover;
+  box-shadow: 0 4px 14px rgba(249,115,22,.4);
+}
+.sidebar-logo-fallback {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg,#f97316,#ea580c);
+  display: none; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.sidebar-logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+.sidebar-logo-text span:first-child { font-size: 12px; font-weight: 900; color: var(--text); }
+.sidebar-logo-text span:last-child { font-family: var(--font-ar); font-size: 11px; color: var(--accent); font-weight: 700; }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+.sidebar-nav { flex: 1; padding: 12px 10px; overflow-y: auto; }
+.nav-label { font-size: 10px; font-weight: 800; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; padding: 8px 10px 4px; }
+.nav-item {
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 12px; border-radius: 10px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 700;
+  transition: all .2s; cursor: pointer; border: none;
+  background: transparent; width: 100%; text-align: left;
+  margin-bottom: 2px;
+}
+.nav-item .nav-icon { font-size: 17px; width: 22px; text-align: center; }
+.nav-item:hover { background: var(--bg3); color: var(--text); }
+.nav-item.active { background: rgba(249,115,22,.12); color: var(--accent); }
+.nav-item.active .nav-icon { filter: none; }
 
-    body {
-      font-family: var(--font-main);
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      transition: background 0.3s, color 0.3s;
-      overflow-x: hidden;
-    }
+.sidebar-bottom {
+  padding: 14px 10px;
+  border-top: 1px solid var(--border);
+}
+.social-row { display: flex; gap: 8px; padding: 6px 4px; }
+.social-btn {
+  width: 34px; height: 34px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--text2); font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; text-decoration: none; transition: all .2s;
+}
+.social-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* ===== ANIMATED BG ===== */
-    .bg-orbs {
-      position: fixed; inset: 0;
-      pointer-events: none; z-index: 0; overflow: hidden;
-    }
-    .orb {
-      position: absolute; border-radius: 50%;
-      filter: blur(90px); opacity: 0.1;
-      animation: float 10s ease-in-out infinite;
-    }
-    .orb1 { width: 500px; height: 500px; background: #e8681a; top: -150px; left: -100px; animation-delay: 0s; }
-    .orb2 { width: 400px; height: 400px; background: #38bdf8; bottom: 10%; right: -100px; animation-delay: 4s; }
-    .orb3 { width: 300px; height: 300px; background: #4ade80; top: 50%; left: 35%; animation-delay: 7s; }
-    [data-theme="light"] .orb { opacity: 0.06; }
+/* ===== TOPBAR ===== */
+.topbar {
+  position: fixed; top: 0; left: var(--sidebar-w); right: 0;
+  height: var(--topbar-h);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 20px;
+  z-index: 100;
+  transition: left .3s;
+}
+.search-wrap {
+  flex: 1; max-width: 500px;
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 0 14px; height: 40px;
+  transition: border-color .2s;
+}
+.search-wrap:focus-within { border-color: var(--accent); }
+.search-wrap span { color: var(--text3); font-size: 15px; flex-shrink: 0; }
+.search-wrap input {
+  flex: 1; background: none; border: none; outline: none;
+  color: var(--text); font-family: var(--font); font-size: 13px;
+}
+.search-wrap input::placeholder { color: var(--text3); }
 
-    @keyframes float {
-      0%,100% { transform: translate(0,0) scale(1); }
-      33% { transform: translate(20px,-20px) scale(1.05); }
-      66% { transform: translate(-15px,15px) scale(0.95); }
-    }
+.topbar-right { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.top-btn {
+  height: 36px; padding: 0 14px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--text2); font-family: var(--font); font-size: 12px;
+  font-weight: 800; cursor: pointer; display: flex; align-items: center;
+  gap: 6px; transition: all .2s; white-space: nowrap;
+}
+.top-btn:hover { border-color: var(--accent); color: var(--accent); }
+.lang-select {
+  height: 36px; padding: 0 10px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--text); font-family: var(--font); font-size: 12px;
+  font-weight: 800; cursor: pointer; outline: none;
+}
+.avatar-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: linear-gradient(135deg,#f97316,#ea580c);
+  border: none; cursor: pointer; font-size: 17px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .2s;
+}
+.avatar-btn:hover { transform: scale(1.08); }
 
-    /* ===== NAVBAR ===== */
-    .navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 60px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 16px;
-      background: rgba(10,15,13,0.9);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      transition: background 0.3s;
-      gap: 8px;
-    }
-    [data-theme="light"] .navbar { background: rgba(240,250,244,0.95); }
+/* Mobile topbar toggle */
+.menu-toggle {
+  display: none;
+  width: 36px; height: 36px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--text); font-size: 18px; cursor: pointer;
+  align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
 
-    /* LOGO */
-    .nav-logo {
-      display: flex; align-items: center; gap: 8px;
-      text-decoration: none; flex-shrink: 0; min-width: 0;
-    }
-    .logo-img {
-      width: 36px; height: 36px; border-radius: 10px;
-      object-fit: cover; flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(232,104,26,0.4);
-    }
-    .logo-fallback {
-      width: 36px; height: 36px; border-radius: 10px;
-      background: linear-gradient(135deg, #e8681a, #d45f10);
-      display: none; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
-    }
-    .logo-text {
-      display: flex; flex-direction: column; line-height: 1.2;
-      min-width: 0; overflow: hidden;
-    }
-    .logo-uz {
-      font-size: 11px; font-weight: 900; color: var(--text);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .logo-ar {
-      font-family: var(--font-ar); font-size: 10px;
-      color: var(--accent); font-weight: 700;
-    }
+/* ===== MAIN CONTENT ===== */
+.main {
+  margin-left: var(--sidebar-w);
+  padding-top: var(--topbar-h);
+  min-height: 100vh;
+  transition: margin-left .3s;
+}
+.content { padding: 24px 24px 40px; max-width: 1400px; }
 
-    /* LANG */
-    .nav-langs {
-      display: flex; align-items: center; gap: 2px;
-      flex-shrink: 0;
-    }
-    .lang-btn {
-      padding: 4px 8px; border-radius: 7px;
-      border: 1px solid var(--border);
-      background: transparent; color: var(--text2);
-      font-family: var(--font-main); font-size: 10px; font-weight: 800;
-      cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
-    }
-    .lang-btn:hover, .lang-btn.active {
-      background: var(--accent); color: #fff; border-color: var(--accent);
-    }
+/* ===== HERO SLIDER ===== */
+.hero-slider {
+  border-radius: 18px; overflow: hidden;
+  background: linear-gradient(135deg, #1a1f35 0%, #0d1117 100%);
+  position: relative; margin-bottom: 32px;
+  min-height: 300px;
+}
+.hero-slide {
+  display: none; padding: 36px 40px;
+  align-items: center; gap: 32px;
+  min-height: 300px;
+}
+.hero-slide.active { display: flex; animation: slideIn .4s ease; }
+@keyframes slideIn { from{opacity:0;transform:translateX(20px)} to{opacity:1;transform:translateX(0)} }
 
-    /* NAV RIGHT */
-    .nav-right {
-      display: flex; align-items: center; gap: 4px; flex-shrink: 0;
-    }
-    .icon-btn {
-      width: 34px; height: 34px; border-radius: 9px;
-      border: 1px solid var(--border); background: var(--card);
-      color: var(--text2); cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; font-size: 14px; flex-shrink: 0;
-    }
-    .icon-btn:hover { background: var(--card-hover); color: var(--accent); border-color: var(--accent); }
+.hero-text { flex: 1; min-width: 0; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(249,115,22,.15); border: 1px solid rgba(249,115,22,.3);
+  color: var(--accent); font-size: 11px; font-weight: 800;
+  padding: 4px 12px; border-radius: 100px; margin-bottom: 14px;
+}
+.hero-title {
+  font-size: clamp(22px,3.5vw,40px); font-weight: 900; line-height: 1.2;
+  margin-bottom: 10px;
+}
+.hero-title .hi { color: var(--text); }
+.hero-title .ha { color: var(--accent); }
+.hero-desc { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 20px; max-width: 380px; }
+.hero-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-primary {
+  padding: 10px 22px; border-radius: 10px; border: none;
+  background: linear-gradient(135deg,#f97316,#ea580c);
+  color: #fff; font-family: var(--font); font-size: 13px; font-weight: 800;
+  cursor: pointer; display: flex; align-items: center; gap: 7px;
+  box-shadow: 0 4px 14px rgba(249,115,22,.35); transition: all .2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(249,115,22,.45); }
+.btn-secondary {
+  padding: 10px 22px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--text); font-family: var(--font); font-size: 13px; font-weight: 800;
+  cursor: pointer; transition: all .2s;
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-    .btn-signin {
-      padding: 6px 12px; border-radius: 8px;
-      border: 1px solid var(--border); background: transparent;
-      color: var(--text); font-family: var(--font-main);
-      font-size: 11px; font-weight: 800; cursor: pointer; transition: all 0.2s;
-      white-space: nowrap;
-    }
-    .btn-signin:hover { border-color: var(--accent); color: var(--accent); }
+.hero-img {
+  width: 200px; height: 200px; object-fit: contain;
+  flex-shrink: 0; filter: drop-shadow(0 10px 30px rgba(249,115,22,.3));
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-    .btn-signup {
-      padding: 6px 12px; border-radius: 8px;
-      border: none;
-      background: linear-gradient(135deg, #e8681a, #d45f10);
-      color: #fff; font-family: var(--font-main);
-      font-size: 11px; font-weight: 800; cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 3px 10px rgba(232,104,26,0.35);
-      white-space: nowrap;
-    }
-    .btn-signup:hover { transform: translateY(-1px); box-shadow: 0 5px 16px rgba(232,104,26,0.5); }
+.hero-dots {
+  position: absolute; bottom: 14px; left: 40px;
+  display: flex; gap: 6px;
+}
+.hero-dot {
+  width: 8px; height: 8px; border-radius: 4px;
+  background: rgba(255,255,255,.2); cursor: pointer; transition: all .3s; border: none;
+}
+.hero-dot.active { width: 22px; background: var(--accent); }
 
-    /* Responsive navbar */
-    @media (max-width: 600px) {
-      .btn-signin { display: none; }
-    }
-    @media (max-width: 480px) {
-      .logo-uz { display: none; }
-    }
-    @media (max-width: 360px) {
-      .logo-ar { display: none; }
-      .nav-langs { gap: 1px; }
-      .lang-btn { padding: 3px 6px; font-size: 9px; }
-    }
+/* ===== SECTION ===== */
+.section { margin-bottom: 28px; }
+.section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-size: 16px; font-weight: 900;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-title::before {
+  content: ''; width: 4px; height: 16px;
+  background: linear-gradient(180deg,#f97316,#38bdf8);
+  border-radius: 4px; display: block;
+}
+.see-all {
+  font-size: 12px; font-weight: 700; color: var(--accent);
+  text-decoration: none; transition: opacity .2s;
+}
+.see-all:hover { opacity: .7; }
 
-    /* ===== SEARCH OVERLAY ===== */
-    .search-overlay {
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,0.75); backdrop-filter: blur(12px);
-      display: flex; align-items: flex-start; justify-content: center;
-      padding-top: 100px;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .search-overlay.open { opacity: 1; pointer-events: all; }
-    .search-box { width: 100%; max-width: 560px; padding: 0 16px; }
-    .search-input-wrap { position: relative; }
-    .search-input {
-      width: 100%; padding: 14px 48px 14px 18px;
-      border-radius: 14px; border: 2px solid var(--accent);
-      background: var(--bg2); color: var(--text);
-      font-family: var(--font-main); font-size: 15px; outline: none;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-    .search-close {
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; color: var(--text2); font-size: 18px; cursor: pointer;
-    }
-    .search-hint { text-align: center; margin-top: 10px; color: var(--text3); font-size: 12px; }
+/* ===== FILM CARDS (popular) ===== */
+.films-scroll {
+  display: flex; gap: 12px; overflow-x: auto;
+  padding-bottom: 6px; scroll-snap-type: x mandatory;
+}
+.films-scroll::-webkit-scrollbar { height: 4px; }
+.films-scroll::-webkit-scrollbar-track { background: transparent; }
+.films-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
 
-    /* ===== AUTH MODAL ===== */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 300;
-      background: rgba(0,0,0,0.75); backdrop-filter: blur(12px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 16px;
-      opacity: 0; pointer-events: none; transition: opacity 0.3s;
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 22px; padding: 28px; width: 100%; max-width: 380px;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
-      transform: translateY(20px); transition: transform 0.3s;
-      position: relative;
-    }
-    .modal-overlay.open .modal { transform: translateY(0); }
-    .modal-close {
-      position: absolute; top: 14px; right: 14px;
-      width: 32px; height: 32px; border-radius: 8px;
-      border: 1px solid var(--border); background: var(--card);
-      color: var(--text2); font-size: 15px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .modal-title { font-size: 20px; font-weight: 900; margin-bottom: 4px; }
-    .modal-subtitle { font-size: 12px; color: var(--text2); margin-bottom: 20px; }
-    .modal-tabs { display: flex; gap: 6px; margin-bottom: 18px; }
-    .modal-tab {
-      flex: 1; padding: 8px; border-radius: 9px;
-      border: 1px solid var(--border); background: transparent;
-      color: var(--text2); font-family: var(--font-main);
-      font-size: 12px; font-weight: 700; cursor: pointer; transition: all 0.2s;
-    }
-    .modal-tab.active {
-      background: linear-gradient(135deg, #e8681a, #d45f10);
-      color: #fff; border-color: transparent;
-    }
-    .form-group { margin-bottom: 12px; }
-    .form-label { display: block; font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 5px; }
-    .form-input {
-      width: 100%; padding: 10px 13px; border-radius: 9px;
-      border: 1px solid var(--border); background: var(--bg3);
-      color: var(--text); font-family: var(--font-main); font-size: 13px;
-      outline: none; transition: border-color 0.2s;
-    }
-    .form-input:focus { border-color: var(--accent); }
-    .btn-primary {
-      width: 100%; padding: 11px; border-radius: 10px; border: none;
-      background: linear-gradient(135deg, #e8681a, #d45f10);
-      color: #fff; font-family: var(--font-main); font-size: 13px; font-weight: 800;
-      cursor: pointer; transition: all 0.2s; margin-top: 4px;
-      box-shadow: 0 4px 14px rgba(232,104,26,0.35);
-    }
-    .btn-primary:hover { transform: translateY(-1px); }
+.film-card {
+  flex-shrink: 0; width: 150px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  cursor: pointer; transition: all .3s;
+  scroll-snap-align: start; text-decoration: none; display: block;
+}
+.film-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+.film-card-img {
+  width: 100%; height: 100px; object-fit: cover;
+  background: linear-gradient(135deg,#1c2330,#0d1117);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; position: relative;
+}
+.film-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.film-card-img .overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(0,0,0,.7));
+}
+.film-card-body { padding: 10px 11px; }
+.film-card-title { font-size: 12px; font-weight: 800; color: var(--text); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.film-card-meta { font-size: 10px; color: var(--text3); }
 
-    /* ===== MAIN ===== */
-    main { position: relative; z-index: 1; padding-top: 60px; }
+/* ===== CATALOG GRID ===== */
+.filter-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;
+}
+.filter-tab {
+  padding: 6px 14px; border-radius: 8px;
+  border: 1px solid var(--border); background: var(--card);
+  color: var(--text2); font-family: var(--font); font-size: 12px;
+  font-weight: 700; cursor: pointer; transition: all .2s;
+}
+.filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+.filter-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
-    /* ===== HERO ===== */
-    .hero {
-      padding: 56px 20px 44px;
-      text-align: center; max-width: 700px; margin: 0 auto;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 5px 14px; border-radius: 100px;
-      background: rgba(232,104,26,0.1); border: 1px solid rgba(232,104,26,0.3);
-      color: var(--accent); font-size: 12px; font-weight: 700;
-      margin-bottom: 20px;
-      animation: fadeInDown 0.6s ease both;
-    }
-    .hero-title {
-      font-size: clamp(24px, 5vw, 48px);
-      font-weight: 900; line-height: 1.15; margin-bottom: 12px;
-      animation: fadeInDown 0.6s ease 0.1s both;
-    }
-    .hero-title .grad {
-      background: linear-gradient(135deg, #e8681a, #f59e0b, #4ade80);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .hero-title-ar {
-      font-family: var(--font-ar); display: block;
-      font-size: clamp(14px, 2.5vw, 22px);
-      color: var(--text2); font-weight: 600; margin-top: 4px;
-    }
-    .hero-desc {
-      font-size: 14px; color: var(--text2); line-height: 1.7;
-      margin-bottom: 28px; padding: 0 8px;
-      animation: fadeInDown 0.6s ease 0.2s both;
-    }
-    .hero-stats {
-      display: flex; justify-content: center;
-      gap: 20px; flex-wrap: wrap;
-      animation: fadeInDown 0.6s ease 0.3s both;
-    }
-    .stat { text-align: center; }
-    .stat-num { font-size: 24px; font-weight: 900; color: var(--accent); display: block; }
-    .stat-label { font-size: 10px; color: var(--text3); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+}
+.catalog-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  cursor: pointer; transition: all .3s; text-decoration: none; display: block;
+  -webkit-tap-highlight-color: transparent;
+}
+.catalog-card:hover { transform: translateY(-4px); border-color: var(--card-color, var(--accent)); box-shadow: 0 10px 28px rgba(0,0,0,.3); }
+@media (hover: none) { .catalog-card:active { transform: scale(.97); } }
+.catalog-img {
+  width: 100%; height: 90px;
+  background: linear-gradient(135deg, var(--card-color, #1c2330), #0d1117);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; position: relative; overflow: hidden;
+}
+.catalog-img img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.catalog-img-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,.5)); }
+.catalog-body { padding: 10px 12px; }
+.catalog-name { font-size: 12px; font-weight: 800; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.catalog-sub { font-family: var(--font-ar); font-size: 10px; color: var(--text3); margin-top: 1px; }
+.catalog-count {
+  display: inline-flex; align-items: center; gap: 3px;
+  margin-top: 6px; padding: 2px 8px; border-radius: 100px;
+  background: rgba(255,255,255,.05);
+  font-size: 10px; font-weight: 700; color: var(--text2);
+}
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* ===== OVERLAY (sidebar mobile) ===== */
+.sidebar-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.5); z-index: 190;
+}
+.sidebar-overlay.open { display: block; }
 
-    /* ===== SECTION ===== */
-    .section { padding: 12px 16px 52px; max-width: 1200px; margin: 0 auto; }
-    .section-header { display: flex; align-items: center; margin-bottom: 18px; }
-    .section-title {
-      font-size: 18px; font-weight: 900; color: var(--text);
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-title::before {
-      content: ''; display: block; width: 4px; height: 18px;
-      background: linear-gradient(180deg, #e8681a, #4ade80);
-      border-radius: 4px;
-    }
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .topbar { left: 0; }
+  .main { margin-left: 0; }
+  .menu-toggle { display: flex; }
+  .content { padding: 16px 16px 32px; }
+  .hero-slide { padding: 24px 20px; flex-direction: column; gap: 16px; min-height: unset; }
+  .hero-img { width: 140px; height: 140px; }
+  .hero-dots { left: 20px; }
+}
+@media (max-width: 600px) {
+  .catalog-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .films-scroll { gap: 8px; }
+  .film-card { width: 130px; }
+}
+@media (max-width: 400px) {
+  .catalog-grid { grid-template-columns: repeat(2, 1fr); }
+  .topbar { padding: 0 12px; gap: 8px; }
+}
 
-    /* ===== CATALOG GRID ===== */
-    .catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 12px;
-    }
+/* ===== FOOTER ===== */
+.footer {
+  margin-left: var(--sidebar-w);
+  background: var(--bg2); border-top: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+  transition: margin-left .3s;
+}
+.footer-copy { font-size: 11px; color: var(--text3); }
+.footer-copy span { color: var(--accent); font-weight: 700; }
+@media (max-width: 900px) { .footer { margin-left: 0; } }
 
-    @media (max-width: 480px) {
-      .catalog-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    }
-
-    .catalog-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.34, 1.4, 0.64, 1);
-      position: relative;
-      text-decoration: none;
-      display: block;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .catalog-img-wrap {
-      overflow: hidden; position: relative; height: 100px;
-    }
-
-    .catalog-bg {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-      transition: transform 0.4s ease;
-    }
-
-    .catalog-bg-fallback {
-      width: 100%; height: 100%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 44px;
-      background: linear-gradient(135deg, var(--card-color, #1a2e1e), #0a0f0d);
-    }
-
-    .catalog-img-wrap::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.6));
-    }
-
-    .catalog-body { padding: 11px 13px; }
-
-    .catalog-name {
-      font-size: 12px; font-weight: 800; color: var(--text);
-      margin-bottom: 2px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .catalog-name-ar {
-      font-family: var(--font-ar); font-size: 10px; color: var(--text3); font-weight: 500;
-    }
-    .catalog-count {
-      display: inline-flex; align-items: center; gap: 3px;
-      margin-top: 7px; padding: 3px 8px; border-radius: 100px;
-      background: rgba(255,255,255,0.06);
-      font-size: 10px; font-weight: 700; color: var(--text2);
-    }
-
-    /* Desktop hover */
-    @media (hover: hover) {
-      .catalog-card:hover {
-        transform: translateY(-6px);
-        border-color: var(--card-color, var(--accent));
-        box-shadow: 0 16px 40px rgba(0,0,0,0.4),
-                    0 0 0 1px var(--card-color, var(--accent));
-      }
-      .catalog-card:hover .catalog-bg { transform: scale(1.08); }
-    }
-
-    /* Mobile tap */
-    @media (hover: none) {
-      .catalog-card:active {
-        transform: scale(0.97);
-        border-color: var(--card-color, var(--accent));
-      }
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      position: relative; z-index: 1;
-      background: var(--bg2); border-top: 1px solid var(--border);
-      padding: 40px 16px 24px;
-    }
-    .footer-inner { max-width: 1200px; margin: 0 auto; }
-    .footer-top {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 24px; flex-wrap: wrap; margin-bottom: 32px;
-    }
-    .footer-brand { max-width: 240px; }
-    .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .footer-logo-img { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; }
-    .footer-logo-fallback {
-      width: 40px; height: 40px; border-radius: 10px;
-      background: linear-gradient(135deg, #e8681a, #d45f10);
-      display: none; align-items: center; justify-content: center; font-size: 20px;
-    }
-    .footer-desc { font-size: 12px; color: var(--text3); line-height: 1.7; }
-    .footer-section-title {
-      font-size: 11px; font-weight: 800; color: var(--text2);
-      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
-    }
-    .social-links { display: flex; flex-direction: column; gap: 7px; }
-    .social-link {
-      display: flex; align-items: center; gap: 9px;
-      padding: 8px 12px; border-radius: 10px;
-      border: 1px solid var(--border); background: var(--card);
-      text-decoration: none; color: var(--text2);
-      font-size: 12px; font-weight: 600; transition: all 0.2s;
-    }
-    .social-link:hover {
-      border-color: var(--sl-color, var(--accent));
-      color: var(--sl-color, var(--accent));
-      transform: translateX(4px);
-    }
-    .social-icon { font-size: 16px; width: 20px; text-align: center; }
-    .footer-bottom {
-      padding-top: 20px; border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 8px;
-    }
-    .footer-copy { font-size: 11px; color: var(--text3); }
-    .footer-copy span { color: var(--accent); font-weight: 700; }
-
-    @media (max-width: 600px) {
-      .footer-top { flex-direction: column; }
-      .hero { padding: 44px 16px 32px; }
-      .hero-stats { gap: 16px; }
-      .section { padding: 10px 12px 44px; }
-    }
-
-    /* ===== SCROLL REVEAL ===== */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    /* ===== TOAST ===== */
-    .toast {
-      position: fixed; bottom: 20px; left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 10px; padding: 10px 16px;
-      font-size: 13px; font-weight: 600; color: var(--text);
-      box-shadow: var(--shadow); z-index: 500;
-      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-      white-space: nowrap; max-width: calc(100vw - 32px);
-    }
-    .toast.show { transform: translateX(-50%) translateY(0); }
-  </style>
+/* ===== ANIMATIONS ===== */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
 </head>
 <body data-theme="dark">
 
-<div class="bg-orbs">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-</div>
+<!-- Sidebar overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar">
-  <a href="#" class="nav-logo">
-    <img src="logo.png" alt="Logo" class="logo-img"
-         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
-    <div class="logo-fallback">🎬</div>
-    <div class="logo-text">
-      <span class="logo-uz">Arabtili va Multfilm</span>
-      <span class="logo-ar">عربية وكرتون</span>
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <a href="#" class="sidebar-logo">
+    <img src="logo.png" alt="Logo"
+      onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+    <div class="sidebar-logo-fallback">🎬</div>
+    <div class="sidebar-logo-text">
+      <span>Arabtili va Multfilm</span>
+      <span>عربية وكرتون</span>
     </div>
   </a>
 
-  <div class="nav-langs">
-    <button class="lang-btn active" onclick="setLang('uz')">UZ</button>
-    <button class="lang-btn" onclick="setLang('ar')">AR</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <nav class="sidebar-nav">
+    <div class="nav-label" data-uz="Menyu" data-ar="القائمة" data-en="Menu">Menyu</div>
+    <button class="nav-item active" onclick="setPage('home')">
+      <span class="nav-icon">🏠</span>
+      <span data-uz="Bosh sahifa" data-ar="الرئيسية" data-en="Home">Bosh sahifa</span>
+    </button>
+    <button class="nav-item" onclick="setPage('multfilm')">
+      <span class="nav-icon">🎬</span>
+      <span data-uz="Multfilmlar" data-ar="كرتون" data-en="Cartoons">Multfilmlar</span>
+    </button>
+    <button class="nav-item" onclick="setPage('serial')">
+      <span class="nav-icon">📺</span>
+      <span data-uz="Multseriallar" data-ar="مسلسلات" data-en="Series">Multseriallar</span>
+    </button>
+    <button class="nav-item" onclick="setPage('subtitr')">
+      <span class="nav-icon">🔤</span>
+      <span data-uz="Subtitrli" data-ar="مترجم" data-en="Subtitled">Subtitrli</span>
+    </button>
+    <div class="nav-label" style="margin-top:8px" data-uz="Hisob" data-ar="الحساب" data-en="Account">Hisob</div>
+    <button class="nav-item" onclick="openAuth()">
+      <span class="nav-icon">👤</span>
+      <span data-uz="Mening ro'yxatim" data-ar="ملفي الشخصي" data-en="My Profile">Mening ro'yxatim</span>
+    </button>
+    <button class="nav-item" onclick="openSettings()">
+      <span class="nav-icon">⚙️</span>
+      <span data-uz="Sozlamalar" data-ar="الإعدادات" data-en="Settings">Sozlamalar</span>
+    </button>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="social-row">
+      <a href="https://t.me/arabtili_va_multfilm" target="_blank" class="social-btn" title="Telegram">✈️</a>
+      <a href="#" class="social-btn" title="Instagram">📸</a>
+      <a href="#" class="social-btn" title="TikTok">🎵</a>
+      <a href="#" class="social-btn" title="YouTube">▶️</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== TOPBAR ===== -->
+<header class="topbar">
+  <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+
+  <div class="search-wrap">
+    <span>🔍</span>
+    <input type="text" id="searchInput"
+      placeholder="Izlash..."
+      data-uz-ph="Izlash..."
+      data-ar-ph="بحث..."
+      data-en-ph="Search..."
+      oninput="handleSearch(this.value)"/>
   </div>
 
-  <div class="nav-right">
-    <button class="icon-btn" onclick="toggleSearch()">🔍</button>
-    <button class="icon-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
-    <button class="btn-signin" onclick="openModal('signin')"
-      data-uz="Kirish" data-ar="دخول" data-en="Sign In">Kirish</button>
-    <button class="btn-signup" onclick="openModal('signup')"
-      data-uz="Ro'yxat" data-ar="تسجيل" data-en="Sign Up">Ro'yxat</button>
+  <div class="topbar-right">
+    <button class="top-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+    <select class="lang-select" onchange="setLang(this.value)">
+      <option value="uz">🇺🇿 UZ</option>
+      <option value="ar">🇸🇦 AR</option>
+      <option value="en">🇬🇧 EN</option>
+    </select>
+    <button class="avatar-btn" onclick="openAuth()">👤</button>
   </div>
-</nav>
-
-<!-- ===== SEARCH ===== -->
-<div class="search-overlay" id="searchOverlay" onclick="closeSearchOutside(event)">
-  <div class="search-box">
-    <div class="search-input-wrap">
-      <input class="search-input" id="searchInput" type="text"
-        placeholder="Multfilm nomini yozing..."
-        onkeydown="handleSearchKey(event)" />
-      <button class="search-close" onclick="toggleSearch()">✕</button>
-    </div>
-    <p class="search-hint"
-      data-uz="Enter — qidirish | ESC — yopish"
-      data-ar="Enter للبحث | ESC للإغلاق"
-      data-en="Enter to search | ESC to close">
-      Enter — qidirish | ESC — yopish
-    </p>
-  </div>
-</div>
-
-<!-- ===== AUTH MODAL ===== -->
-<div class="modal-overlay" id="authModal" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-title" id="modalTitle">Xush kelibsiz! 👋</div>
-    <div class="modal-subtitle" id="modalSubtitle">Hisobingizga kiring</div>
-    <div class="modal-tabs">
-      <button class="modal-tab active" id="tabSignin" onclick="switchTab('signin')"
-        data-uz="Kirish" data-ar="دخول" data-en="Sign In">Kirish</button>
-      <button class="modal-tab" id="tabSignup" onclick="switchTab('signup')"
-        data-uz="Ro'yxatdan o'tish" data-ar="إنشاء حساب" data-en="Sign Up">Ro'yxatdan o'tish</button>
-    </div>
-    <div id="formSignin">
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input class="form-input" type="email" placeholder="example@email.com" />
-      </div>
-      <div class="form-group">
-        <label class="form-label" data-uz="Parol" data-ar="كلمة المرور" data-en="Password">Parol</label>
-        <input class="form-input" type="password" placeholder="••••••••" />
-      </div>
-      <button class="btn-primary" data-uz="Kirish" data-ar="دخول" data-en="Sign In">Kirish</button>
-    </div>
-    <div id="formSignup" style="display:none">
-      <div class="form-group">
-        <label class="form-label" data-uz="Ism" data-ar="الاسم" data-en="Name">Ism</label>
-        <input class="form-input" type="text" placeholder="Ismingiz" />
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email</label>
-        <input class="form-input" type="email" placeholder="example@email.com" />
-      </div>
-      <div class="form-group">
-        <label class="form-label" data-uz="Parol" data-ar="كلمة المرور" data-en="Password">Parol</label>
-        <input class="form-input" type="password" placeholder="••••••••" />
-      </div>
-      <button class="btn-primary"
-        data-uz="Ro'yxatdan o'tish" data-ar="إنشاء حساب" data-en="Create Account">Ro'yxatdan o'tish</button>
-    </div>
-  </div>
-</div>
+</header>
 
 <!-- ===== MAIN ===== -->
-<main>
-  <section class="hero">
-    <div class="hero-badge">🌟
-      <span data-uz="Arab tili orqali dunyoni kashf eting"
-            data-ar="اكتشف العالم عبر اللغة العربية"
-            data-en="Discover the world through Arabic">Arab tili orqali dunyoni kashf eting</span>
-    </div>
-    <h1 class="hero-title">
-      <span class="grad"
-        data-uz="Arabtili va Multfilm"
-        data-ar="عربية وكرتون"
-        data-en="Arabic Cartoons">Arabtili va Multfilm</span>
-      <small class="hero-title-ar">عربية وكرتون</small>
-    </h1>
-    <p class="hero-desc"
-      data-uz="Arab adabiy tili (Fus-ha) va shevalarda dublaj qilingan multfilmlar, multseriallar va filmlar — barchasi bir joyda."
-      data-ar="أفلام الرسوم المتحركة والمسلسلات المدبلجة باللغة العربية — كلها في مكان واحد."
-      data-en="Cartoons, series and films dubbed in Arabic — all in one place.">
-      Arab adabiy tili (Fus-ha) va shevalarda dublaj qilingan multfilmlar, multseriallar va filmlar — barchasi bir joyda.
-    </p>
-    <div class="hero-stats">
-      <div class="stat">
-        <span class="stat-num">149+</span>
-        <span class="stat-label" data-uz="Multfilm" data-ar="كرتون" data-en="Cartoons">Multfilm</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">9+</span>
-        <span class="stat-label" data-uz="Multserial" data-ar="مسلسل" data-en="Series">Multserial</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">4+</span>
-        <span class="stat-label" data-uz="Subtitrli" data-ar="مترجم" data-en="Subtitled">Subtitrli</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num">∞</span>
-        <span class="stat-label" data-uz="Yangi" data-ar="جديد" data-en="New">Yangi</span>
-      </div>
-    </div>
-  </section>
+<main class="main">
+  <div class="content">
 
-  <section class="section reveal">
-    <div class="section-header">
-      <h2 class="section-title"
-        data-uz="Kataloglar" data-ar="الفئات" data-en="Categories">Kataloglar</h2>
-    </div>
-    <div class="catalog-grid">
-
-      <a href="#" class="catalog-card" style="--card-color:#e8681a">
-        <div class="catalog-img-wrap">
-          <img src="cat-multfilm.jpg" alt="" class="catalog-bg"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="catalog-bg-fallback" style="display:none">🎬</div>
-        </div>
-        <div class="catalog-body">
-          <div class="catalog-name" data-uz="Multfilmlar" data-ar="أفلام كرتون" data-en="Cartoons">Multfilmlar</div>
-          <div class="catalog-name-ar">فصحى</div>
-          <span class="catalog-count">📽 149 ta</span>
-        </div>
-      </a>
-
-      <a href="#" class="catalog-card" style="--card-color:#38bdf8">
-        <div class="catalog-img-wrap">
-          <img src="cat-serial.jpg" alt="" class="catalog-bg"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="catalog-bg-fallback" style="display:none">📺</div>
-        </div>
-        <div class="catalog-body">
-          <div class="catalog-name" data-uz="Multseriallar" data-ar="المسلسلات" data-en="Series">Multseriallar</div>
-          <div class="catalog-name-ar">مسلسلات</div>
-          <span class="catalog-count">📺 9 ta</span>
-        </div>
-      </a>
-
-      <a href="#" class="catalog-card" style="--card-color:#ef4444">
-        <div class="catalog-img-wrap">
-          <img src="cat-film.jpg" alt="" class="catalog-bg"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="catalog-bg-fallback" style="display:none">🎥</div>
-        </div>
-        <div class="catalog-body">
-          <div class="catalog-name" data-uz="Filmlar" data-ar="الأفلام" data-en="Films">Filmlar</div>
-          <div class="catalog-name-ar">أفلام</div>
-          <span class="catalog-count">🔜 Tez orada</span>
-        </div>
-      </a>
-
-      <a href="#" class="catalog-card" style="--card-color:#4ade80">
-        <div class="catalog-img-wrap">
-          <img src="cat-sub-en.jpg" alt="" class="catalog-bg"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="catalog-bg-fallback" style="display:none">🔤</div>
-        </div>
-        <div class="catalog-body">
-          <div class="catalog-name" data-uz="Subtitr AR–EN" data-ar="ترجمة عر-إنج" data-en="Subtitle AR–EN">Subtitr AR–EN</div>
-          <div class="catalog-name-ar">عربي - إنجليزي</div>
-          <span class="catalog-count">📝 4 ta</span>
-        </div>
-      </a>
-
-      <a href="#" class="catalog-card" style="--card-color:#a78bfa">
-        <div class="catalog-img-wrap">
-          <img src="cat-sub-uz.jpg" alt="" class="catalog-bg"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="catalog-bg-fallback" style="display:none">🌐</div>
-        </div>
-        <div class="catalog-body">
-          <div class="catalog-name" data-uz="Subtitr AR–UZ" data-ar="ترجمة عر-أوز" data-en="Subtitle AR–UZ">Subtitr AR–UZ</div>
-          <div class="catalog-name-ar">عربي - أوزبكي</div>
-          <span class="catalog-count">🔜 Tez orada</span>
-        </div>
-      </a>
-
-      <a href="#" class="catalog-card" style="--card-color:#f97316">
-        <div class="catalog-img-wrap">
-          <img src="cat-sub-ar.jpg" alt="" class="catalog-bg"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="catalog-bg-fallback" style="display:none">🇸🇦</div>
-        </div>
-        <div class="catalog-body">
-          <div class="catalog-name" data-uz="Subtitr AR–AR" data-ar="ترجمة عر-عر" data-en="Subtitle AR–AR">Subtitr AR–AR</div>
-          <div class="catalog-name-ar">عربي - عربي</div>
-          <span class="catalog-count">🔜 Tez orada</span>
-        </div>
-      </a>
-
-      <a href="#" class="catalog-card" style="--card-color:#06b6d4">
-        <div class="catalog-img-wrap">
-          <img src="cat-misr.jpg" alt="" class="catalog-bg"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="catalog-bg-fallback" style="display:none">🎭</div>
-        </div>
-        <div class="catalog-body">
-          <div class="catalog-name" data-uz="Misr shevasi" data-ar="العامية المصرية" data-en="Egyptian dialect">Misr shevasi</div>
-          <div class="catalog-name-ar">عامية مصرية</div>
-          <span class="catalog-count">🔜 Tez orada</span>
-        </div>
-      </a>
-
-    </div>
-  </section>
-</main>
-
-<!-- ===== FOOTER ===== -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <img src="logo.png" alt="Logo" class="footer-logo-img"
-            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-          <div class="footer-logo-fallback">🎬</div>
-          <div class="logo-text">
-            <span class="logo-uz">Arabtili va Multfilm</span>
-            <span class="logo-ar">عربية وكرتون</span>
+    <!-- HERO SLIDER -->
+    <div class="hero-slider reveal">
+      <!-- Slide 1 -->
+      <div class="hero-slide active">
+        <div class="hero-text">
+          <div class="hero-badge">🌟 <span data-uz="Yangi" data-ar="جديد" data-en="New">Yangi</span></div>
+          <h1 class="hero-title">
+            <span class="hi" data-uz="Arab Tili " data-ar="اللغة " data-en="Arabic ">Arab Tili </span>
+            <span class="ha" data-uz="va Multfilm" data-ar="العربية" data-en="Cartoons">va Multfilm</span>
+          </h1>
+          <p class="hero-desc" data-uz="Arab tilida multfilmlar, multseriallar va subtitrli multfilmlarni eng yaxshi sifatda tomosha qiling!"
+            data-ar="شاهد أفضل الرسوم المتحركة والمسلسلات مدبلجة باللغة العربية!"
+            data-en="Watch cartoons, series and subtitled films in Arabic!">
+            Arab tilida multfilmlar, multseriallar va subtitrli multfilmlarni eng yaxshi sifatda tomosha qiling!
+          </p>
+          <div class="hero-btns">
+            <button class="btn-primary">▶ <span data-uz="Tomosha qilish" data-ar="مشاهدة" data-en="Watch Now">Tomosha qilish</span></button>
+            <button class="btn-secondary" data-uz="Ko'proq ma'lumot" data-ar="مزيد من المعلومات" data-en="Learn More">Ko'proq ma'lumot</button>
           </div>
         </div>
-        <p class="footer-desc"
-          data-uz="Arab tilida multfilm, multserial va filmlarning eng yaxshi to'plami."
-          data-ar="أفضل مجموعة من الكرتون والمسلسلات باللغة العربية."
-          data-en="The best collection of Arabic cartoons and series.">
-          Arab tilida multfilm, multserial va filmlarning eng yaxshi to'plami.
-        </p>
+        <img class="hero-img" src="hero1.png" alt=""
+          onerror="this.style.cssText='font-size:90px;width:160px;height:160px;display:flex;align-items:center;justify-content:center;animation:float 4s ease-in-out infinite'">
       </div>
-      <div>
-        <div class="footer-section-title"
-          data-uz="Bizni kuzating" data-ar="تابعونا" data-en="Follow us">Bizni kuzating</div>
-        <div class="social-links">
-          <a href="https://t.me/arabtili_va_multfilm" target="_blank" class="social-link" style="--sl-color:#29b6f6">
-            <span class="social-icon">✈️</span><span>Telegram</span>
-          </a>
-          <a href="#" target="_blank" class="social-link" style="--sl-color:#e1306c">
-            <span class="social-icon">📸</span><span>Instagram</span>
-          </a>
-          <a href="#" target="_blank" class="social-link" style="--sl-color:#ff0050">
-            <span class="social-icon">🎵</span><span>TikTok</span>
-          </a>
-          <a href="#" target="_blank" class="social-link" style="--sl-color:#ff0000">
-            <span class="social-icon">▶️</span><span>YouTube</span>
-          </a>
+      <!-- Slide 2 -->
+      <div class="hero-slide">
+        <div class="hero-text">
+          <div class="hero-badge">🎬 <span data-uz="130+ Multfilm" data-ar="130+ فيلم" data-en="130+ Films">130+ Multfilm</span></div>
+          <h1 class="hero-title">
+            <span class="hi" data-uz="Mashhur " data-ar="أشهر " data-en="Popular ">Mashhur </span>
+            <span class="ha" data-uz="Multfilmlar" data-ar="الأفلام" data-en="Cartoons">Multfilmlar</span>
+          </h1>
+          <p class="hero-desc" data-uz="Sher Qirol, Kung Fu Panda, Muzyurak va boshqa 130+ multfilmni arab tilida tomosha qiling!"
+            data-ar="شاهد أسد الملك وكونغ فو باندا وأكثر من 130 فيلم باللغة العربية!"
+            data-en="Watch The Lion King, Kung Fu Panda and 130+ films in Arabic!">
+            Sher Qirol, Kung Fu Panda, Muzyurak va boshqa 130+ multfilmni arab tilida tomosha qiling!
+          </p>
+          <div class="hero-btns">
+            <button class="btn-primary" onclick="setPage('multfilm')">🎬 <span data-uz="Multfilmlarga o'tish" data-ar="الأفلام" data-en="View Films">Multfilmlarga o'tish</span></button>
+          </div>
         </div>
+        <div style="font-size:100px;animation:float 4s ease-in-out infinite;flex-shrink:0">🎬</div>
+      </div>
+      <!-- Slide 3 -->
+      <div class="hero-slide">
+        <div class="hero-text">
+          <div class="hero-badge">📺 <span data-uz="9 ta Serial" data-ar="9 مسلسلات" data-en="9 Series">9 ta Serial</span></div>
+          <h1 class="hero-title">
+            <span class="hi" data-uz="Sevimli " data-ar="المسلسلات " data-en="Favorite ">Sevimli </span>
+            <span class="ha" data-uz="Multseriallar" data-ar="المفضلة" data-en="Series">Multseriallar</span>
+          </h1>
+          <p class="hero-desc" data-uz="Smurflar, Kichkina Nikola, Sponjbob va boshqa seriallarni arab tilida tomosha qiling!"
+            data-ar="شاهد السنافر ونيكولا الصغير وسبونج بوب وغيرها باللغة العربية!"
+            data-en="Watch Smurfs, Little Nicolas, SpongeBob and more in Arabic!">
+            Smurflar, Kichkina Nikola, Sponjbob va boshqa seriallarni arab tilida tomosha qiling!
+          </p>
+          <div class="hero-btns">
+            <button class="btn-primary" onclick="setPage('serial')">📺 <span data-uz="Seriallarga o'tish" data-ar="المسلسلات" data-en="View Series">Seriallarga o'tish</span></button>
+          </div>
+        </div>
+        <div style="font-size:100px;animation:float 4s ease-in-out infinite;flex-shrink:0">📺</div>
+      </div>
+
+      <div class="hero-dots">
+        <button class="hero-dot active" onclick="goSlide(0)"></button>
+        <button class="hero-dot" onclick="goSlide(1)"></button>
+        <button class="hero-dot" onclick="goSlide(2)"></button>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copy">© 2025 <span>Arabtili va Multfilm</span>. Barcha huquqlar himoyalangan.</p>
-      <p class="footer-copy" style="font-family:var(--font-ar); direction:rtl;">عربية وكرتون ©</p>
+
+    <!-- MASHHUR MULTFILMLAR -->
+    <div class="section reveal">
+      <div class="section-head">
+        <h2 class="section-title" data-uz="Mashhur multfilmlar" data-ar="أشهر الأفلام" data-en="Popular Cartoons">Mashhur multfilmlar</h2>
+        <a href="#" class="see-all" data-uz="Barchasini ko'rish" data-ar="عرض الكل" data-en="See All">Barchasini ko'rish</a>
+      </div>
+      <div class="films-scroll" id="popularFilms">
+        <!-- JS dan to'ldiriladi -->
+      </div>
     </div>
+
+    <!-- KATALOGLAR -->
+    <div class="section reveal">
+      <div class="section-head">
+        <h2 class="section-title" data-uz="Kataloglar" data-ar="الفئات" data-en="Categories">Kataloglar</h2>
+      </div>
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" onclick="filterCatalog('all')" data-uz="Barchasi" data-ar="الكل" data-en="All">Barchasi</button>
+        <button class="filter-tab" onclick="filterCatalog('multfilm')" data-uz="Multfilmlar" data-ar="كرتون" data-en="Cartoons">Multfilmlar</button>
+        <button class="filter-tab" onclick="filterCatalog('serial')" data-uz="Multseriallar" data-ar="مسلسلات" data-en="Series">Multseriallar</button>
+        <button class="filter-tab" onclick="filterCatalog('subtitr')" data-uz="Subtitrli" data-ar="مترجم" data-en="Subtitled">Subtitrli</button>
+      </div>
+      <div class="catalog-grid" id="catalogGrid">
+        <!-- JS dan to'ldiriladi -->
+      </div>
+    </div>
+
   </div>
+</main>
+
+<footer class="footer">
+  <p class="footer-copy">© 2025 <span>Arabtili va Multfilm</span>. Barcha huquqlar himoyalangan.</p>
+  <p class="footer-copy" style="font-family:var(--font-ar);direction:rtl">عربية وكرتون ©</p>
 </footer>
 
-<div class="toast" id="toast"></div>
-
 <script>
-  let currentLang = 'uz';
+// ===== DATA =====
+const POPULAR = [
+  { title: "Minionlar Gru davri 4", year: "2024", dur: "1soat 34min", emoji: "🟡" },
+  { title: "Qirol Sher (Mufasa)", year: "2024", dur: "1soat 58min", emoji: "🦁" },
+  { title: "Ichki dunyo 2", year: "2024", dur: "1soat 36min", emoji: "😊" },
+  { title: "Kung Fu Panda 4", year: "2024", dur: "1soat 34min", emoji: "🐼" },
+  { title: "Super Mario Bros.", year: "2023", dur: "1soat 32min", emoji: "🎮" },
+  { title: "Zootopia", year: "2016", dur: "1soat 41min", emoji: "🦊" },
+  { title: "Muzyurak", year: "2013", dur: "1soat 42min", emoji: "❄️" },
+  { title: "Moana 2", year: "2024", dur: "1soat 40min", emoji: "🌊" },
+];
 
-  function setLang(lang) {
-    currentLang = lang;
-    document.querySelectorAll('[data-uz]').forEach(el => {
-      const txt = el.getAttribute('data-' + lang) || el.getAttribute('data-uz');
-      if (el.tagName === 'INPUT') el.placeholder = txt;
-      else el.textContent = txt;
-    });
-    document.querySelectorAll('.lang-btn').forEach(b => {
-      b.classList.toggle('active',
-        (lang==='uz'&&b.textContent==='UZ') ||
-        (lang==='ar'&&b.textContent==='AR') ||
-        (lang==='en'&&b.textContent==='EN'));
-    });
-    document.body.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.style.fontFamily = lang === 'ar' ? "'Tajawal',sans-serif" : "'Nunito',sans-serif";
-  }
+const CATALOGS = [
+  { id: "multfilm", type: "multfilm", color: "#f97316", emoji: "🎬", uz: "Multfilmlar", ar: "أفلام كرتون", en: "Cartoons", sub: "فصحى", count: "📽 130+ ta" },
+  { id: "serial", type: "serial", color: "#38bdf8", emoji: "📺", uz: "Multseriallar", ar: "المسلسلات", en: "Series", sub: "مسلسلات", count: "📺 9 ta" },
+  { id: "film", type: "film", color: "#ef4444", emoji: "🎥", uz: "Filmlar", ar: "الأفلام", en: "Films", sub: "أفلام", count: "🔜 Tez orada" },
+  { id: "sub-en", type: "subtitr", color: "#4ade80", emoji: "🔤", uz: "Subtitr AR–EN", ar: "ترجمة عر-إنج", en: "Subtitle AR–EN", sub: "عربي - إنجليزي", count: "📝 4 ta" },
+  { id: "sub-uz", type: "subtitr", color: "#a78bfa", emoji: "🌐", uz: "Subtitr AR–UZ", ar: "ترجمة عر-أوز", en: "Subtitle AR–UZ", sub: "عربي - أوزبكي", count: "🔜 Tez orada" },
+  { id: "sub-ar", type: "subtitr", color: "#f59e0b", emoji: "🇸🇦", uz: "Subtitr AR–AR", ar: "ترجمة عر-عر", en: "Subtitle AR–AR", sub: "عربي - عربي", count: "🔜 Tez orada" },
+  { id: "misr", type: "multfilm", color: "#06b6d4", emoji: "🎭", uz: "Misr shevasi", ar: "العامية المصرية", en: "Egyptian dialect", sub: "عامية مصرية", count: "🔜 Tez orada" },
+];
 
-  let isDark = true;
-  function toggleTheme() {
-    isDark = !isDark;
-    document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
-    showToast(isDark ? "🌙 Qorong'u rejim" : '☀️ Yorug rejim');
-  }
+let currentLang = 'uz';
+let currentSlide = 0;
+let slideInterval;
 
-  function toggleSearch() {
-    const o = document.getElementById('searchOverlay');
-    const open = o.classList.toggle('open');
-    if (open) setTimeout(() => document.getElementById('searchInput').focus(), 100);
-  }
-  function closeSearchOutside(e) { if (e.target.id==='searchOverlay') toggleSearch(); }
-  function handleSearchKey(e) {
-    if (e.key==='Escape') toggleSearch();
-    if (e.key==='Enter' && e.target.value.trim()) showToast('🔍 ' + e.target.value.trim());
-  }
+// ===== RENDER POPULAR =====
+function renderPopular() {
+  const c = document.getElementById('popularFilms');
+  c.innerHTML = POPULAR.map(f => `
+    <a href="https://t.me/arabtili_va_multfilm" target="_blank" class="film-card">
+      <div class="film-card-img">
+        <span style="font-size:40px">${f.emoji}</span>
+        <div class="overlay"></div>
+      </div>
+      <div class="film-card-body">
+        <div class="film-card-title">${f.title}</div>
+        <div class="film-card-meta">${f.year} · ${f.dur}</div>
+      </div>
+    </a>
+  `).join('');
+}
 
-  function openModal(tab) { document.getElementById('authModal').classList.add('open'); switchTab(tab); }
-  function closeModal() { document.getElementById('authModal').classList.remove('open'); }
-  function closeModalOutside(e) { if (e.target.id==='authModal') closeModal(); }
-  function switchTab(tab) {
-    document.getElementById('formSignin').style.display = tab==='signin' ? 'block' : 'none';
-    document.getElementById('formSignup').style.display = tab==='signup' ? 'block' : 'none';
-    document.getElementById('tabSignin').classList.toggle('active', tab==='signin');
-    document.getElementById('tabSignup').classList.toggle('active', tab==='signup');
-    const t = {
-      uz: { signin:['Xush kelibsiz! 👋','Hisobingizga kiring'], signup:['Hisob yarating 🚀',"Ro'yxatdan o'ting"] },
-      ar: { signin:['مرحباً! 👋','سجل دخولك'], signup:['إنشاء حساب 🚀','سجل الآن'] },
-      en: { signin:['Welcome! 👋','Sign in to your account'], signup:['Create Account 🚀','Sign up for free'] }
-    }[currentLang][tab];
-    document.getElementById('modalTitle').textContent = t[0];
-    document.getElementById('modalSubtitle').textContent = t[1];
-  }
+// ===== RENDER CATALOGS =====
+function renderCatalogs(filter = 'all') {
+  const g = document.getElementById('catalogGrid');
+  const filtered = filter === 'all' ? CATALOGS : CATALOGS.filter(c => c.type === filter);
+  g.innerHTML = filtered.map(c => `
+    <a href="https://t.me/arabtili_va_multfilm" target="_blank" class="catalog-card" style="--card-color:${c.color}">
+      <div class="catalog-img" style="background:linear-gradient(135deg,${c.color}22,#0d1117)">
+        <img src="cat-${c.id}.jpg" alt="" onerror="this.style.display='none'">
+        <span style="position:relative;z-index:1;font-size:36px">${c.emoji}</span>
+        <div class="catalog-img-overlay"></div>
+      </div>
+      <div class="catalog-body">
+        <div class="catalog-name">${c[currentLang] || c.uz}</div>
+        <div class="catalog-sub">${c.sub}</div>
+        <span class="catalog-count">${c.count}</span>
+      </div>
+    </a>
+  `).join('');
+}
 
-  document.addEventListener('keydown', e => {
-    if (e.key==='Escape') {
-      document.getElementById('searchOverlay').classList.remove('open');
-      document.getElementById('authModal').classList.remove('open');
-    }
+function filterCatalog(f) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  renderCatalogs(f);
+}
+
+// ===== HERO SLIDER =====
+function goSlide(n) {
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dot');
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+}
+function autoSlide() {
+  slideInterval = setInterval(() => {
+    goSlide((currentSlide + 1) % document.querySelectorAll('.hero-slide').length);
+  }, 4000);
+}
+
+// ===== LANG =====
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-uz]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang) || el.getAttribute('data-uz');
+    if (el.tagName === 'INPUT') el.placeholder = txt;
+    else el.textContent = txt;
   });
+  // search placeholder
+  const si = document.getElementById('searchInput');
+  si.placeholder = si.getAttribute('data-' + lang + '-ph') || si.getAttribute('data-uz-ph');
+  document.body.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
+  document.body.style.fontFamily = lang === 'ar' ? "'Tajawal',sans-serif" : "'Nunito',sans-serif";
+  renderCatalogs('all');
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.filter-tab').classList.add('active');
+}
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ===== THEME =====
+let isDark = true;
+function toggleTheme() {
+  isDark = !isDark;
+  document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+}
 
-  function showToast(msg) {
-    const t = document.getElementById('toast');
-    t.textContent = msg; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2500);
-  }
+// ===== SIDEBAR =====
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+// ===== PAGE NAV =====
+function setPage(page) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  closeSidebar();
+  // kelajakda sahifalar qo'shiladi
+}
+
+function openAuth() { alert("Tez orada — hisob tizimi qo'shiladi! 🔐"); }
+function openSettings() { alert("Sozlamalar — tez orada! ⚙️"); }
+
+// ===== SEARCH =====
+function handleSearch(val) {
+  if (!val.trim()) return renderPopular();
+  const filtered = POPULAR.filter(f => f.title.toLowerCase().includes(val.toLowerCase()));
+  const c = document.getElementById('popularFilms');
+  if (!filtered.length) { c.innerHTML = '<p style="color:var(--text3);font-size:13px;padding:8px">Hech narsa topilmadi</p>'; return; }
+  c.innerHTML = filtered.map(f => `
+    <a href="https://t.me/arabtili_va_multfilm" target="_blank" class="film-card">
+      <div class="film-card-img"><span style="font-size:40px">${f.emoji}</span><div class="overlay"></div></div>
+      <div class="film-card-body">
+        <div class="film-card-title">${f.title}</div>
+        <div class="film-card-meta">${f.year} · ${f.dur}</div>
+      </div>
+    </a>
+  `).join('');
+}
+
+// ===== SCROLL REVEAL =====
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===== INIT =====
+renderPopular();
+renderCatalogs('all');
+autoSlide();
 </script>
 </body>
 </html>
